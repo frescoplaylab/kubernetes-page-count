@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: node-redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node-redis
+        version: v1
+    spec:
+      containers:
+      - name: node-redis
+        image: hegde9/node-redis
+        ports:
+        - containerPort: 8000
+          protocol: TCP
