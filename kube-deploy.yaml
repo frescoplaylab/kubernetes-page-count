@@ -1,18 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: node-redis
+  name: node-mongo-page-hit
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: node-redis
+        app: node-mongo-page-hit
         version: v1
     spec:
       containers:
-      - name: node-redis
-        image: hegde9/node-redis
+      - name: node-mongo-page-hit
+        image: hegde9/node-mongo-page-hit
         ports:
         - containerPort: 8000
           protocol: TCP
+        env:
+        - name: PORT
+          value: 8000
