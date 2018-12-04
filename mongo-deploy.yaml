@@ -18,4 +18,3 @@ spec:
         ports:
         - containerPort: 27017
           protocol: TCP
-

@@ -1,6 +1,6 @@
 const http = require('http');
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://mongo:27017';
+const url = 'mongodb://localhost:27017';
 const dbName = 'test';
 const port = process.env.PORT || 8000;
 let db = null;
@@ -12,23 +12,19 @@ async function incrementPageHit() {
   console.log("Connected successfully to server");
   db = client.db(dbName);
   collection = db.collection('hitcount');
-  let docs = await collection.find({}).toArray();
-  if (docs.length <= 0) {
-    await collection.insertMany([{
-      hit: 1
-    }]);
-    client.close();
-    return 1;
-  } else {
     let result = await collection.findOneAndUpdate({}, {
       $inc: {
         hit: 1
       }
     }, {
+      upsert: true,
       new: true
     });
-    return result.value.hit;
-  }
+    client.close();
+    if(result.value&&result.value.hit)
+        return result.value.hit+1;
+    else  
+        return 1;
 }
 
 http.createServer(function (req, res) {
