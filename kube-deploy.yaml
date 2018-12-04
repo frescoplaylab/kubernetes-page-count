@@ -1,21 +1,23 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-mongo-page-hit
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: node-mongo-page-hit
   template:
     metadata:
       labels:
         app: node-mongo-page-hit
-        version: v1
     spec:
       containers:
       - name: node-mongo-page-hit
-        image: hegde9/node-mongo-page-hit
+        image: hegde9/node-mongo-page-hit:latest
         ports:
         - containerPort: 8000
           protocol: TCP
         env:
         - name: PORT
-          value: 8000
+          value: '8000'

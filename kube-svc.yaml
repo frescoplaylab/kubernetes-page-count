@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: node-mongo-page-hit
 spec:
+  selector:
+    app: node-mongo-page-hit
   type: NodePort
   ports:
     - port: 8000
-      nodePort: 30800
       targetPort: 8000
-  selector:
-    name: node-mongo-page-hit
+      nodePort: 30800
