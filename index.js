@@ -1,6 +1,6 @@
 const http = require('http');
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://mongo:27017';
 const dbName = 'test';
 const port = process.env.PORT || 8000;
 let db = null;
